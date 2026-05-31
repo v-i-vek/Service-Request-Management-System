@@ -1,6 +1,7 @@
 package com.example.demo.auth;
 
 import java.net.http.HttpClient;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthDto authDto) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody AuthDto authDto) {
         String token = this.authService.login(authDto);
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("token", token), HttpStatus.OK);
+        // return ResponseEntity.ok(
+        // Map.of("token", token));
+
     }
 }

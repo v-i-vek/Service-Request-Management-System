@@ -25,7 +25,7 @@ public class AppConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll());
+                        .requestMatchers("api/v1/auth/**").permitAll().anyRequest().authenticated());
 
         return http.build();
     }
